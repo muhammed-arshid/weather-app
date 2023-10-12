@@ -1,4 +1,7 @@
 .container {
+  background-image: url('/images/weather_bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
   min-height: 100vh;
   padding: 0 0.5rem;
   display: flex;
@@ -19,6 +22,7 @@
 }
 
 .title {
+  padding-top: 20px;
   margin: 0 0 1rem;
   line-height: 1.15;
   font-size: 3.6rem;
