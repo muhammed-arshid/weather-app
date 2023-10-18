@@ -6,6 +6,7 @@ import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { BsSearch } from 'react-icons/bs';
 import moment from 'moment'
+import Spinner from '../components/Spinner';
 
 export default function Home() {
   const [city, setCity] = useState('');
@@ -138,7 +139,8 @@ const fetchSearchHistory = () => {
           </button>
         </form>
       </div>
-      {weather.main && <Weather data={weather} searches={history} />}
-    </div>
+      {loading && <Spinner />}
+    {!loading && weather.main && <Weather data={weather} searches={history} />}
+     </div>
   );
 }
