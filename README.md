@@ -5,16 +5,18 @@
 ## Description
 This is a simple weather application that allows users to check the weather conditions for a specific location.
 ## Features
-    • Get current weather information by entering a city or location.
-    • Display temperature, humidity, wind speed, and weather condition.
-    • User-friendly interface for easy navigation.
-    • Display past three search histories of the city.
+  - Get current weather information by entering a city or location.
+  - Display temperature, humidity, wind speed, and weather condition.
+  - User-friendly interface for easy navigation.
+  - Display past three search histories of the city.
 
 ## Installation
-    1. Clone the repository: git clone https://github.com/muhammed-arshid/weather-app.git
-    2. Navigate to the project directory: cd weather-app
-    3. Install dependencies: npm install
-    4. Start the app: npm run dev
+- Clone the repository: git clone https://github.com/muhammed-arshid/weather-app.git
+- Navigate to the project directory: cd weather-app
+- Install dependencies: npm install
+- install [MongoDB](https://www.digitalocean.com/community/tutorials/how-to-install-mongodb-on-ubuntu-20-04) 
+- install [MongoDB compass](https://www.mongodb.com/docs/compass/current/install/#std-label-download-install)
+- Start the app: npm run dev
 ## Usage
     1. Open your web browser and go to http://localhost:3000
 ## API Usage
