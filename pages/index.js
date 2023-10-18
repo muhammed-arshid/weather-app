@@ -5,6 +5,8 @@ import Weather from '../components/Weather';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { BsSearch } from 'react-icons/bs';
+import moment from 'moment'
+
 
 export default function Home() {
   const [city, setCity] = useState('');
