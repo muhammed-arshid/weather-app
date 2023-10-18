@@ -5,11 +5,13 @@ import Weather from '../components/Weather';
 import Image from 'next/image';
 import styles from '../styles/Home.module.css';
 import { BsSearch } from 'react-icons/bs';
+import moment from 'moment'
 
 export default function Home() {
   const [city, setCity] = useState('');
   const [weather, setWeather] = useState({});
   const [loading, setLoading] = useState(false);
+  const [history, setHistory] = useState({});
 
   useEffect(() => {
     if (city == '') {
@@ -66,11 +68,15 @@ export default function Home() {
           ...openWeatherData,
           windDirection: windDirection
         });
+
+        fetchSearchHistory();
+
         addWeatherData();
 
       })
       .catch(error => {
-        console.error('Error fetching weather data:', error);
+        alert("Please check the spelling")
+        console.error('Error fetching weather data');
       })
       .finally(() => {
         setLoading(false);
@@ -95,6 +101,12 @@ export default function Home() {
     }
   };
   
+const fetchSearchHistory = () => {
+    axios.get('/api/showData?city='+city).then((response) => {
+      setHistory(response.data);
+    })
+  };
+
 
   return (
     <div>
@@ -105,7 +117,7 @@ export default function Home() {
       <Image
         src='/images/weather_bg.jpg'
         layout='fill'
-        objectPosition='absolute'
+        objectPosition='relative'
       />
       <div className='relative flex justify-between items-center max-w-[500px] w-full m-auto pt-4 px-4 z-10'>
 
@@ -126,7 +138,7 @@ export default function Home() {
           </button>
         </form>
       </div>
-      {weather.main && <Weather data={weather} />}
+      {weather.main && <Weather data={weather} searches={history} />}
     </div>
   );
 }
