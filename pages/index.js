@@ -66,6 +66,7 @@ export default function Home() {
           ...openWeatherData,
           windDirection: windDirection
         });
+        addWeatherData();
 
       })
       .catch(error => {
@@ -75,6 +76,25 @@ export default function Home() {
         setLoading(false);
       });
   };
+
+  const addWeatherData = async () => {
+    const response = await fetch('/api/addData', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({city: city,
+        timestamp: moment().toDate(),
+        data: weather
+      }),
+    });
+    if (response.status === 201 || response.status === 200 ) {
+      console.log('added successfully');
+    } else {
+      console.error('adding failed');
+    }
+  };
+  
 
   return (
     <div>
