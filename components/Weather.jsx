@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import React from 'react';
-import styles from '../styles/Home.module.css';
+import moment from 'moment'
 
-const Weather = ({ data }) => {
-    return (
+const Weather = ({ data, searches }) => {
+    return ( 
         <>
-            <div className='relative flex flex-col justify-between max-w-[500px] w-full h-[90vh] m-auto p-4 z-10'>
+            <div className='relative flex flex-col justify-between max-w-[500px] w-full h[400px] m-auto p-4 z-10'>
                 {/* Top */}
                 <div className='relative flex justify-between pt-12'>
                     <div className='flex flex-col items-center'>
@@ -21,7 +21,7 @@ const Weather = ({ data }) => {
                 </div>
                 {/* Bottom */}
 
-                <div className='bg-black/50 relative p-8 rounded-md'>
+                <div className='bg-black/60 text-gray-400 relative p-8 rounded-md mt-12'>
                     <p className='text-2xl text-center pb-6'>Weather in {data.name}</p>
                     <div className='flex justify-between text-center'>
                         <div>
@@ -39,33 +39,27 @@ const Weather = ({ data }) => {
                     </div>
                 </div>
             </div>
-            <div className='bg-black/50 relative p-8 rounded-md h-auto w-auto'>
-                <p className='text-2xl text-center pb-6'>Recent searches in same city</p>
-                <div className='flex justify-between text-center h-auto'>
-                    <div class="w-1/2 border-l-2 border-gray-400 h-auto"></div>
-                    <div className='min-w-[300px]'>
-                        <span className='text-xl'>Time </span><span className='font-bold text-2xl'>2023-10-13 09:23</span><br />
-                        <span className='text-xl'>Temp </span><span className='font-bold text-2xl'>91&#176;</span><br />
-                        <span className='text-xl'>Humidity </span><span className='font-bold text-2xl'>18%</span><br />
-                        <span className='text-xl'>Winds </span><span className='font-bold text-2xl'>90MPH-NE</span><br />
-                    </div>
-                    <div class="w-1/2 border-l-2 border-gray-400 h-auto"></div>
-                    <div className='min-w-[300px]'>
-                        <span className='text-xl'>Time </span><span className='font-bold text-2xl'>2023-10-13 09:20</span><br />
-                        <span className='text-xl'>Temp </span><span className='font-bold text-2xl'>92&#176;</span><br />
-                        <span className='text-xl'>Humidity </span><span className='font-bold text-2xl'>15%</span><br />
-                        <span className='text-xl'>Winds </span><span className='font-bold text-2xl'>80MPH-NE</span><br />
-                    </div>
-                    <div class="w-1/2 border-l-2 border-gray-400 h-auto"></div>
-                    <div className='min-w-[300px]'>
-                        <span className='text-xl'>Time </span><span className='font-bold text-2xl'>2023-10-13 09:15</span><br />
-                        <span className='text-xl'>Temp </span><span className='font-bold text-2xl'>93&#176;</span><br />
-                        <span className='text-xl'>Humidity </span><span className='font-bold text-2xl'>16%</span><br />
-                        <span className='text-xl'>Winds </span><span className='font-bold text-2xl'>96MPH-NE</span><br />
-                    </div>
-                    <div class="w-1/2 border-l-2 border-gray-400 h-auto"></div>
+
+            {searches.length > 0 && (
+                <div className='bg-black/50 relative p-8 rounded-md h-auto w-auto mt-12 ml-60 mr-60 text-center'>
+                <p className='text-2xl pb-6 w-auto'>Recent searches in same city</p>
+                <div className='flex justify-between text-center h-auto w-auto'>
+                    <div className="border-l-2 border-gray-400 h-auto m-1"></div>
+                    {searches.map((item, index) => (
+                        <>
+                        <div className='min-w-[200px] max-w-[300px]'>
+                            <span className='text-l'>Time </span><span className='font-bold text-xl'>{moment(item.timestamp).format("MMM D, YYYY, h:mm A")}</span><br />
+                            <span className='text-l'>Temp </span><span className='font-bold text-xl'>{item.data.main.temp.toFixed(0)}&#176;</span><br />
+                            <span className='text-l'>Humidity </span><span className='font-bold text-xl'>{item.data.main.humidity}%</span><br />
+                            <span className='text-l'>Winds </span><span className='font-bold text-xl'>{item.data.wind.speed.toFixed(0)} MPH -{searches[0].data.windDirection}</span><br />
+                        </div>
+                        <div className="border-l-2 border-gray-400 h-auto m-1"></div>
+                        </>
+                        ))}
                 </div>
             </div>
+            ) }
+            
         </>
     );
 };
